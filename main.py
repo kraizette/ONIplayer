@@ -1,37 +1,15 @@
-from PyQt5 import QtWidgets # import PyQt5 widgets
+from PyQt5 import QtWidgets
 import sys
 
-# Create the application object
+from ui.interface import Ui_Form
+from player import Player
+
 app = QtWidgets.QApplication(sys.argv)
 
-# Create the form object
-first_window = QtWidgets.QWidget()
+player = QtWidgets.QWidget()
 
-# Set window size
-first_window.resize(400, 300)
+playerUI = Ui_Form()
 
-# Set the form title
-first_window.setWindowTitle("The first pyqt program")
+player = Player(playerUI)
 
-# Show form
-first_window.show()
-
-# Run the program
-sys.exit(app.exec())
-
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+sys.exit(app.exec_())
