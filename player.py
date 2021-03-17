@@ -10,9 +10,12 @@ class Player(QtWidgets.QWidget):
     def __init__(self, interface):
         super().__init__()
         interface.setupUi(self)
-        self.interface = interface
 
         # interface = Ui_Form() #experemental
+
+        self.interface = interface
+
+        self.pause = True
 
         self.setFixedSize(self.size())
 
@@ -22,6 +25,9 @@ class Player(QtWidgets.QWidget):
 
         self.configurePlayButton()
 
+        self.configureNextButton()
+
+        self.configurePreviousButton()
 
         self.show()
 
@@ -30,11 +36,34 @@ class Player(QtWidgets.QWidget):
 
     def configurePlayButton(self):
         self.interface.playButton.setEnabled(False)
+        self.interface.playButton.clicked.connect(self.playevent)
 
+    def configureNextButton(self):
+        self.interface.nextFrameButton.setEnabled(False)
+
+    def configurePreviousButton(self):
+        self.interface.previousFrameButton.setEnabled(False)
 
     def loadfile(self):
         filename,_ = QtWidgets.QFileDialog.getOpenFileName(self, "Open Video")
         self.interface.videoInformation.setText(filename)
+        self.interface.playButton.setEnabled(True)
+        self.interface.nextFrameButton.setEnabled(True)
+        self.interface.previousFrameButton.setEnabled(True)
+
+    def playevent(self):
+        if self.pause == True:
+            self.interface.playButton.setText("Pause")
+            self.pause = False
+            self.interface.nextFrameButton.setEnabled(False)
+            self.interface.previousFrameButton.setEnabled(False)
+
+        else:
+            self.interface.playButton.setText("Play")
+            self.pause = True
+            self.interface.nextFrameButton.setEnabled(True)
+            self.interface.previousFrameButton.setEnabled(True)
+
 
         # if filename != '':
         #     self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile(filename)))
