@@ -40,10 +40,10 @@ class Ui_Form(object):
         self.videoInformation.setStyleSheet("")
         self.videoInformation.setObjectName("videoInformation")
         self.colorView = QtWidgets.QGraphicsView(Form)
-        self.colorView.setGeometry(QtCore.QRect(20, 60, 640, 480))
+        self.colorView.setGeometry(QtCore.QRect(20, 60, 642, 482))
         self.colorView.setObjectName("colorView")
         self.dephView = QtWidgets.QGraphicsView(Form)
-        self.dephView.setGeometry(QtCore.QRect(670, 60, 640, 480))
+        self.dephView.setGeometry(QtCore.QRect(670, 60, 642, 482))
         self.dephView.setObjectName("dephView")
 
         self.retranslateUi(Form)

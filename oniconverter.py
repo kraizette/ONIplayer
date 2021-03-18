@@ -3,7 +3,7 @@ from openni import openni2
 # https://github.com/thelotusflower/openni-file-player/blob/master/oni_func.py
 
 
-def getVideo():
+def getVideo(filename):
     OPENNI_FOLDER_PATH = r"C:\Program Files (x86)\OpenNI2\Redist"
     ONI_VIDEO_PATH = 'D:\Projects\Python\ONI\oni_for_player\cap1.oni'
 
