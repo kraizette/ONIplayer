@@ -1,7 +1,7 @@
 from openni import openni2
 
 # https://github.com/thelotusflower/openni-file-player/blob/master/oni_func.py
-
+# https://www.programmersought.com/article/78854922872/
 
 def getVideo(filename):
     OPENNI_FOLDER_PATH = r"C:\Program Files (x86)\OpenNI2\Redist"

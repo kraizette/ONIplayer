@@ -116,14 +116,14 @@ class Player(QtWidgets.QWidget):
         # Pause event
         if self.timer.isActive():
             self.timer.stop()
-            self.interface.playButton.setText("Play")
+            self.interface.playButton.setStyleSheet('QPushButton{border-image:url(ui/play.png)}')
             self.interface.nextFrameButton.setEnabled(True)
             self.interface.previousFrameButton.setEnabled(True)
 
         # Play event
         else:
+            self.interface.playButton.setStyleSheet('QPushButton{border-image:url(ui/pause.png)}')
             self.timer.start(28, self)
-            self.interface.playButton.setText("Pause")
             self.interface.nextFrameButton.setEnabled(False)
             self.interface.previousFrameButton.setEnabled(False)
             self.tickEvent(False)

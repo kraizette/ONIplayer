@@ -21,9 +21,9 @@
   <widget class="QSlider" name="timeSlider">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>600</y>
-     <width>1291</width>
+     <x>230</x>
+     <y>580</y>
+     <width>1081</width>
      <height>22</height>
     </rect>
    </property>
@@ -43,34 +43,6 @@
    <property name="text">
     <string>Load</string>
    </property>
-  </widget>
-  <widget class="QSplitter" name="splitter_2">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>550</y>
-     <width>1291</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <widget class="QPushButton" name="previousFrameButton">
-    <property name="text">
-     <string>Previous frame</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="playButton">
-    <property name="text">
-     <string>Play</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="nextFrameButton">
-    <property name="text">
-     <string>Next frame</string>
-    </property>
-   </widget>
   </widget>
   <widget class="QTextBrowser" name="videoInformation">
    <property name="geometry">
@@ -105,7 +77,46 @@
     </rect>
    </property>
   </widget>
+  <widget class="QSplitter" name="splitter">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>560</y>
+     <width>191</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <widget class="QPushButton" name="previousFrameButton">
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/icons/back.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="playButton">
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/icons/play.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="nextFrameButton">
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/icons/next.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>
