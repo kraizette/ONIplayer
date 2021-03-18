@@ -1,7 +1,8 @@
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtCore import Qt, QBasicTimer
+import numpy as np
+import cv2
 
-from ui.interface import Ui_Form
 from oniconverter import getVideo
 
 class Player(QtWidgets.QWidget):
@@ -34,15 +35,13 @@ class Player(QtWidgets.QWidget):
         scene.addItem(self.pixmap)
         interface.colorView.setScene(scene)
 
-        # scene2 = QtWidgets.QGraphicsScene()
-        # self.pixmap2 = QtWidgets.QGraphicsPixmapItem()
-        # scene2.addItem(self.pixmap2)
-        # interface.dephView.setScene(scene2)
+        scene2 = QtWidgets.QGraphicsScene()
+        self.pixmap2 = QtWidgets.QGraphicsPixmapItem()
+        scene2.addItem(self.pixmap2)
+        interface.dephView.setScene(scene2)
 
         self.framesColor.clear()
-        # self.framesDepth.clear()
-
-        # self.framesColor, self.framesDepth = getVideo()
+        self.framesDepth.clear()
 
         self.show()
 
@@ -93,20 +92,8 @@ class Player(QtWidgets.QWidget):
         self.interface.previousFrameButton.setEnabled(True)
         self.interface.timeSlider.setEnabled(True)
 
-        self.framesColor = [
-            "1 (1).jpg", "1 (2).jpg",
-            "1 (3).jpg", "1 (4).jpg",
-            "1 (5).jpg", "1 (1).jpg",
-            "1 (2).jpg", "1 (3).jpg",
-            "1 (4).jpg", "1 (5).jpg",
-            "1 (1).jpg", "1 (2).jpg",
-            "1 (3).jpg", "1 (4).jpg",
-            "1 (5).jpg", "1 (1).jpg",
-            "1 (2).jpg", "1 (3).jpg",
-            "1 (4).jpg", "1 (5).jpg",
-        ]
-
         self.interface.timeSlider.setRange(0, len(self.framesColor) - 1)
+
 
         self.loadFrame()
 
@@ -172,23 +159,25 @@ class Player(QtWidgets.QWidget):
 
     # Load file from explorer
     def loadfile(self) -> None:
-        self.filename, _ = QtWidgets.QFileDialog.getOpenFileName(self, "Open Video")
+        self.filename, _ = QtWidgets.QFileDialog.getOpenFileName(self, "Open File",
+                                                                ".",
+                                                                "ONIfiles (*.oni)");
+        self.framesColor.clear()
+        self.framesDepth.clear()
+        self.framesColor, self.framesDepth = getVideo(self.filename)
 
     # Load frame to widget
     def loadFrame(self) -> None:
         input_image = self.framesColor[self.tick]
-        # input_depth = self.framesDepth[self.tick]
-        bytesPerLine = 3 * 640
-        y = self.interface.colorView.height()
-        x = self.interface.colorView.width()
-        # qImg = QtGui.QImage(input_image.data, x, y, bytesPerLine, QtGui.QImage.Format_RGB888)
-        qImg = QtGui.QImage(x, y,  QtGui.QImage.Format_RGB888)
-        qImg.load(self.framesColor[self.tick])
-        qImg.scaled(x, y, Qt.KeepAspectRatio)
-        # qImg2 = QtGui.QImage(input_depth.data, x, y, bytesPerLine, QtGui.QImage.Format_Indexed8)
-        pixmap01 = QtGui.QPixmap.fromImage(qImg)
-        pixmap01.scaled(x, y, Qt.IgnoreAspectRatio)
-        # pixmap02 = QtGui.QPixmap.fromImage(qImg2)
+        input_depth = self.framesDepth[self.tick]
 
-        # self.pixmap2.setPixmap(pixmap02)
+        bytesPerLine = 3*640
+
+        qImg = QtGui.QImage(input_image.data, 638, 478, bytesPerLine, QtGui.QImage.Format_RGB888)
+        qImg2 = QtGui.QImage(input_depth.data, 638, 478, bytesPerLine, QtGui.QImage.Format_Indexed8)
+
+        pixmap01 = QtGui.QPixmap.fromImage(qImg)
+        pixmap02 = QtGui.QPixmap.fromImage(qImg2)
+
+        self.pixmap2.setPixmap(pixmap02)
         self.pixmap.setPixmap(pixmap01)

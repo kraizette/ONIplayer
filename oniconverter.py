@@ -1,19 +1,12 @@
 from openni import openni2
 
-# https://github.com/thelotusflower/openni-file-player/blob/master/oni_func.py
-# https://www.programmersought.com/article/78854922872/
-
-def getVideo(filename):
-    OPENNI_FOLDER_PATH = r"C:\Program Files (x86)\OpenNI2\Redist"
-    ONI_VIDEO_PATH = 'D:\Projects\Python\ONI\oni_for_player\cap1.oni'
-
-    openni2.initialize(OPENNI_FOLDER_PATH)
+def getVideo(filename: str):
+    openni2.initialize()
 
     framesColor = []
     framesDepth = []
 
-    file = openni2.Device.open_file(ONI_VIDEO_PATH.encode('utf-8'))
-    file.set_depth_color_sync_enabled
+    file = openni2.Device.open_file(filename.encode('utf-8'))
     cStream = openni2.VideoStream(file, openni2.SENSOR_COLOR)
     dStream = openni2.VideoStream(file, openni2.SENSOR_DEPTH)
 
